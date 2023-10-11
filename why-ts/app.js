@@ -12,19 +12,20 @@ var user = {};
 function fetchUser(){
   return axios.get(url)
 }
+// 섹션1-3 코드 따라치다가 말았음
 // console.log(fetchUser());
 /**
  * @typedef {object} User
  * @property {string} name
  * @property {string} email
- * @property {string} address
+ * @property {Address} address
  */
 /**
  * @returns {Promise<User>}
  */
 
 fetchUser().then(function(response){
-  response.name
+  response.u
 });
 
 
