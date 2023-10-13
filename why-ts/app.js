@@ -1,33 +1,45 @@
 // api url
-var url = 'https://jsonplaceholder.typicode.com/users/1';
+var url = "https://jsonplaceholder.typicode.com/users/1";
 
 // dom
-var username = document.querySelector('#username');
-var email = document.querySelector('#email');
-var address = document.querySelector('#address');
+var username = document.querySelector("#username");
+var email = document.querySelector("#email");
+var address = document.querySelector("#address");
 
 // user data
+/**
+ * @type {User};
+ */
 var user = {};
 
-function fetchUser(){
-  return axios.get(url)
-}
-// 섹션1-3 코드 따라치다가 말았음
-// console.log(fetchUser());
 /**
- * @typedef {object} User
+ * @typedef {object} Address
+ * @property {string} street
+ * @property {string} city
+ */
+
+/**
+ * @typedef {object} Data
  * @property {string} name
  * @property {string} email
  * @property {Address} address
  */
 /**
+ * @typedef {object} User
+ * @property {Data} data
+ */
+/**
  * @returns {Promise<User>}
  */
 
-fetchUser().then(function(response){
-  response.u
-});
+function fetchUser() {
+  return axios.get(url);
+}
 
+
+fetchUser().then(function (response) {
+  response.Address
+});
 
 function startApp() {
   // axios
@@ -49,3 +61,4 @@ function startApp() {
 }
 
 startApp();
+
