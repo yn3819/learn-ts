@@ -1,30 +1,31 @@
-let todoItem: any;
+//할 일의 목록을 받는 배열(맨 하단)
+let todoItems: object[]; //ex) : number[], :string[]
 
 // api
-function fetchTodoItems() {
+function fetchTodoItems(): object[] {
   const todos = [
     { id: 1, title: '안녕', done: false },
     { id: 2, title: '타입', done: false },
     { id: 3, title: '스크립트', done: false },
   ];
-  return todos;
+  return todos; //배열을 반환
 }
 
 // crud methods
-function fetchTodos() {
+function fetchTodos(): object[] {
   const todos = fetchTodoItems();
   return todos;
 }
 
-function addTodo(todo): void {
+function addTodo(todo: object): void {
   todoItems.push(todo);
 }
 
-function deleteTodo(index) {
+function deleteTodo(index: number): void {
   todoItems.splice(index, 1);
 }
 
-function completeTodo(index, todo) {
+function completeTodo(index:number, todo: object):void {
   todo.done = true;
   todoItems.splice(index, 1, todo);
 }
