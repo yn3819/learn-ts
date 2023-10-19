@@ -36,9 +36,49 @@ sum = function (a: number, b: number): number {
 
 // 4. 인덱싱 방식을 정의하는 인터페이스
 interface StringArray {
-    [index: number]: string; // 4-2. number의 첫번째가 string이다
-
+  [index: number]: string; // 4-2. number의 첫번째가 string이다
 }
 
-var arr: StringArray = ['a', 'b', 'c'] // 4-3. 모든 타입이 string이 되었음
-arr[0] = '22'
+var arr: StringArray = ["a", "b", "c"]; // 4-3. 모든 타입이 string이 되었음
+arr[0] = "22";
+
+// 5. 딕셔너리 패텬
+interface StringRegexDictionary {
+  [key: string]: RegExp; // key:string = sth: /abc/ 라는뜻
+}
+
+var obj: StringRegexDictionary = {
+  // sth: /abc/,
+  // cssFile: 'css' // 이 스트링 형식은 RegExp에 할당할 수 없습니다
+  cssFile: /\.css$/, //css파일로 끝나는 파일들(확장자들)
+  jsFile: /\.js$/,
+};
+
+// obj['cssFile'] = 'a' // a형식은  Regex형식에 할당할 수 없다고 뜸
+Object.keys(obj).forEach(function (value) {
+  //마우스대면 추론, 스트링
+});
+
+// 6. 인터페이스 확장(상속)
+interface Person {
+  name: string;
+  age: number;
+}
+
+// 6-2. 이게 아니라, 6-3으로
+// interface Developer {
+//     name: string;
+//     age: number;
+//     langeage: string;
+// }
+
+// 6-3.
+interface Developer extends Person {
+  langeage: string;
+}
+
+var capt2: Developer = {
+    name: 'a',
+    age: 20,
+    langeage: 'js'
+}
