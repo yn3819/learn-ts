@@ -8,12 +8,12 @@ class Person2 {
     this.age = age;
   }
 }
+
 /*
 // 리액트 예전 문법
 class App extends react.Component{
 
 }
-
 
 // 리액트: 훅 기반의 함수형 코드
 function App(){
