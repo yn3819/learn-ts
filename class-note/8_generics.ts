@@ -43,6 +43,8 @@ const num = logNumber(10);
 // A-1, A-2 이렇게해도 문제 없이 함수 쓸 수 있지만, 유지보수 관점에서는 좋지 않음.
 // 단순히 타입을 바꾸기 위해 중복 함수를 만드는 것은 좋지 않음. 이것을 위해 다음시간 유니온 타입으로.
 
+
+
 // 3. 기존 타입 정의 방식과 제네릭의 차이점 - 유니온 타입 방식의 문제점
 
 function logText3(text: string | number) {
@@ -57,4 +59,41 @@ const a = logText3("a"); //문제점2: 문자로 받았음에도 불구하고
 // 즉, 인풋에 대한 해결은 됐지만, 반환값에 대한 것 해결 안됨
 logText3(10);
 
+
+
 // 4. 2번과 3번을 제네릭으로 어떻게 해결할 수 있는가
+// 제네릭의 장점과 타입 추론에서의 이점
+
+function logText4<T>(text: T) {
+  console.log(text);
+  return text;
+}
+
+logText4<string>('a')
+const str = logText4<string>('a');
+str.split('')
+const login = logText4<boolean>(true);
+// logText4<number>('aaaa')
+
+// 번외
+interface TrueFalse {
+  value: boolean;
+  selected: boolean;
+}
+
+// 5. 인터페이스에 제네릭을 선언하는 방법
+// 5-1. 비교
+// interface Dropdown {
+//   value: string;
+//   selected: boolean;
+// }
+
+// const obj: Dropdown = { value: 10, selected: false }; 숫자 선언불가
+
+// 5-2. 비교
+interface Dropdown<T> {
+  value: T;
+  selected: boolean;
+}
+
+const obj: Dropdown<string> = { value: 'abc', selected: false };
