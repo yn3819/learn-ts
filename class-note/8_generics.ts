@@ -97,3 +97,17 @@ interface Dropdown<T> {
 }
 
 const obj: Dropdown<string> = { value: 'abc', selected: false };
+
+// 6. 제네릭의 타입 제한
+function logTextLength<T>(text: T): T[]{
+  // console.log(text.length); //<T> 에러뜨는이유: ts입장에서는 무슨 타입 들어올지 모름(개발자만 앎)
+  //[] T[]배열이기때문에 렝스 쓸수있게됨. 그러나 스트링으로 바꾸면 배열 들어와야돼서 에러듬
+
+  text.forEach(function(text){
+    console.log(text);
+  })
+  return text;
+
+}
+// logTextLength('hi'); //ts입장에서는 무슨 타입 들어올지 몰라서 text.length 오류남
+// logTextLength<string>('hi'); //배열 아니라서 오류
