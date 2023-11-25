@@ -109,17 +109,37 @@ function logTextLength<T>(text: T[]): T[] {
 // logTextLength<string>('hi'); //배열 아니라서 오류
 logTextLength<string>(["hi", "hello"]); //배열 아니라서 오류
 
-// 7. 제네릭 타입 제한 2 - "정의된 타입" 이용하기
+// 7. 제네릭 타입 제한 2 - 정의된 타입 이용하기
 interface LengthType {
-  length: number;
+  length2: number;
 }
 
 // T extends LengthType : 제네릭으로 받은 타입은 항상 렝스타입으로 받을 것이라는 뜻?
-function logTextLength2<T extends LengthType >(text: T): T {
-  text.length;
+function logTextLength2<T extends LengthType>(text: T): T {
+  text.length2;
   return text;
 }
-logTextLength2('a');
+// logTextLength2("a");
 // logTextLength2(10); // 숫자는 렝스 안됨
 // 'a'.length // 문자열은 렝스 나옴
-logTextLength2({length: 10}) //뭔소린지 모르겠음
+logTextLength2({ length2: 10 }); //뭔소린지 모르겠음
+
+// 8. 제네릭 타입 제한 3 - keyof
+interface ShoppingItem {
+  name: string;
+  pirce: number;
+  stock: number;
+}
+
+//8-1. function getShoppingItemOption<T>(itemOption: T): T {
+//   return itemOption;
+// }
+
+//8-2. 만약 여기서 인터페이스에 있는 타입만 받겠다라고 한다면? 8-1 변경
+function getShoppingItemOption<T extends keyof ShoppingItem>(itemOption: T): T {
+  return itemOption;
+}
+
+// getShoppingItemOption(10);
+// getShoppingItemOption<string>("a");
+getShoppingItemOption("name"); //() ctrl+Space
