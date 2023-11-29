@@ -10,6 +10,12 @@ interface Contact {
   phones: PhoneNumberDictionary;
 }
 
+enum PhoneType{
+  Home = 'home',
+  Office = 'office',
+  Studio = 'studio'
+}
+
 // api
 // TODO: 아래 함수의 반환 타입을 지정해보세요.
 function fetchContacts(): Promise<Contact[]> {
@@ -57,45 +63,56 @@ function fetchContacts(): Promise<Contact[]> {
 // main
 class AddressBook {
   // TODO: 아래 변수의 타입을 지정해보세요.
-  contacts = [];
+  contacts:Contact[   ] = [];
 
   constructor() {
     this.fetchData();
   }
 
-  fetchData() {
+  fetchData(): void {
     fetchContacts().then(response => {
       this.contacts = response;
     });
   }
 
   /* TODO: 아래 함수들의 파라미터 타입과 반환 타입을 지정해보세요 */
-  findContactByName(name) {
+  findContactByName(name: string): Contact[] {
     return this.contacts.filter(contact => contact.name === name);
   }
 
-  findContactByAddress(address) {
+  findContactByAddress(address: string): Contact[] {
     return this.contacts.filter(contact => contact.address === address);
   }
 
-  findContactByPhone(phoneNumber, phoneType: string) {
+  findContactByPhone(phoneNumber: number, phoneType: PhoneType): Contact[] {
     return this.contacts.filter(
       contact => contact.phones[phoneType].num === phoneNumber
     );
   }
+  // findContactByPhone('homee') // 오탈자가 날 수 있음. 타입추론 문제. 13줄,따라서 이넘 사용하는 게 좋음
+  // findContactByPhone(PhoneType.phone) // 컨스트럭트에 들어가면 호출될 것임
 
-  addContact(contact) {
+  addContact(contact: Contact): void { //보이드: 기본적으로 호출하고 반환값 없기때문에.
     this.contacts.push(contact);
   }
 
-  displayListByName() {
+  displayListByName():string[] {
     return this.contacts.map(contact => contact.name);
   }
 
-  displayListByAddress() {
+  displayListByAddress(): string[] {
     return this.contacts.map(contact => contact.address);
   }
   /* ------------------------------------------------ */
 }
+
+// map 배열 뽑아서 재배열 만들어줌
+let heroes = [
+  {name: 'Tony', age: 30},
+  {name: 'Captain', age: 100},
+]
+heroes.map(function(hero){
+  return hero.name;
+}) // ['Tony', 'Captain']
 
 new AddressBook();
